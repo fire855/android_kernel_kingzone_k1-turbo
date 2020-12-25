@@ -153,7 +153,7 @@ CUSTOM_KERNEL_MAIN_LENS=#dw9718af
 CUSTOM_KERNEL_RTC=rtc
 
 # For audio kernel driver's speaker customization folder definition.
-CUSTOM_KERNEL_SOUND=amp_yad_spk_amp_tpa6136_hp
+CUSTOM_KERNEL_SOUND=amp_yad
 CUSTOM_KERNEL_SSW=ssw_single
 
 # lens driver config for video telephony camera (2nd solution)
