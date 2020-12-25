@@ -1475,14 +1475,7 @@ UINT32 IMX111MIPIPreview(MSDK_SENSOR_EXPOSURE_WINDOW_STRUCT *image_window,
 		image_window->GrabStartY= iStartY;
 		image_window->ExposureWindowWidth= IMX111MIPI_IMAGE_SENSOR_PV_WIDTH - 2*iStartX;
 		image_window->ExposureWindowHeight= IMX111MIPI_IMAGE_SENSOR_PV_HEIGHT - 2*iStartY;
-		if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
-		{
-			sensor_config_data->SensorImageMirror = IMAGE_NORMAL;
-		}
-		else
-		{
-			sensor_config_data->SensorImageMirror = IMAGE_HV_MIRROR;
-		}
+		sensor_config_data->SensorImageMirror = IMAGE_HV_MIRROR;
 		IMX111MIPISetFlipMirror(sensor_config_data->SensorImageMirror);
 		SENSORDB("Preview resolution:%d %d %d %d\n", image_window->GrabStartX, image_window->GrabStartY, image_window->ExposureWindowWidth, image_window->ExposureWindowHeight);
 		SENSORDB("shutter&gain test by hhl: exit the preview function IMX111MIPIPreview\n");
@@ -1524,14 +1517,7 @@ UINT32 IMX111MIPIVideo(MSDK_SENSOR_EXPOSURE_WINDOW_STRUCT *image_window,
 		image_window->GrabStartX= iStartX;
 		image_window->GrabStartY= iStartY;
 		
-		if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
-		{
-			sensor_config_data->SensorImageMirror = IMAGE_NORMAL;
-		}
-		else
-		{
-			sensor_config_data->SensorImageMirror = IMAGE_HV_MIRROR;
-		}
+		sensor_config_data->SensorImageMirror = IMAGE_HV_MIRROR;
 		IMX111MIPISetFlipMirror(sensor_config_data->SensorImageMirror);
 		
 	//	image_window->ExposureWindowWidth= IMX111MIPI_IMAGE_SENSOR_PV_WIDTH - 2*iStartX;
@@ -1575,14 +1561,8 @@ UINT32 IMX111MIPICapture(MSDK_SENSOR_EXPOSURE_WINDOW_STRUCT *image_window,
 	spin_lock(&imx111_drv_lock);
     memcpy(&IMX111MIPISensorConfigData, sensor_config_data, sizeof(MSDK_SENSOR_CONFIG_STRUCT));
 	spin_unlock(&imx111_drv_lock);
-	if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
-	{
-		sensor_config_data->SensorImageMirror = IMAGE_NORMAL;
-	}
-	else
-	{
-		sensor_config_data->SensorImageMirror = IMAGE_HV_MIRROR;
-	}
+	
+	sensor_config_data->SensorImageMirror = IMAGE_HV_MIRROR;
 	IMX111MIPISetFlipMirror(sensor_config_data->SensorImageMirror);
 	SENSORDB("shutter&gain test by hhl: exit the capture function IMX111MIPICapture\n");
 
@@ -2188,4 +2168,3 @@ UINT32 IMX111_MIPI_RAW_SensorInit(PSENSOR_FUNCTION_STRUCT *pfFunc)
 
     return ERROR_NONE;
 }   /* SensorInit() */
-
