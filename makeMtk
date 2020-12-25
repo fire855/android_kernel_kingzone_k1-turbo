@@ -44,15 +44,15 @@ setCacheEnvVars() if (uc($ENV{"MTK_INTERNAL"}) eq "TRUE");
 
 # Vanzo:songlixin on: Wed, 01 Dec 2010 10:24:42 +0800
 # call our python scripts to overylay project specific files
-$res=p_system("build/tools/update_overlay_files.py");
+#$res=p_system("build/tools/update_overlay_files.py");
 
 
 # Vanzo: on: Fri, 18 Jul 2014 17:26:27 +0800
 # added by wf for check the result of update_overlay_files to exit gracefully
-print("update_overlay_files res:",$res);
-if($res!=0){
-    exit(-1);
-}
+#print("update_overlay_files res:",$res);
+#if($res!=0){
+#    exit(-1);
+#}
 # End of Vanzo:wf
 
 # End of Vanzo:songlixin
