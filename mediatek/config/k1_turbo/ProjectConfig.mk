@@ -113,7 +113,7 @@ CUSTOM_KERNEL_DCT=dct
 CUSTOM_KERNEL_EEPROM=dummy_eeprom
 
 # Kernel space cameara flashlight driver. You can use this driver to choose cameara flashlight type.
-CUSTOM_KERNEL_FLASHLIGHT=#constant_flashlight
+CUSTOM_KERNEL_FLASHLIGHT=constant_flashlight
 
 # gyro driver
 CUSTOM_KERNEL_GYROSCOPE=

@@ -25,6 +25,7 @@
 #include <linux/version.h>
 #include <mach/upmu_common.h>
 #include <mach/mt6333.h>
+#include <mach/mt_pwm.h>
 /******************************************************************************
  * Debug configuration
 ******************************************************************************/
@@ -56,6 +57,9 @@
 	#define PK_VER(a,...)
 	#define PK_ERR(a,...)
 #endif
+
+#define FLASH_GPIO_ENF GPIO12
+#define FLASH_GPIO_ENT GPIO13
 
 /******************************************************************************
  * local variables
@@ -105,69 +109,40 @@ static void setRegEx(int reg, int val, int mask, int shift)
 }
 static int FL_preOn(void)
 {
-	PK_DBG("FL_preOn");
-    setRegEx(0xF3,0x1,0x1,5); //work around for chip issue
-    setRegEx(0xF7,0x1,0x1,5); //work around for chip issue
-    if(dimLevel[g_duty]>=0)
-    {
-        setRegEx(0x32,0x1,0x1,4);  //torch mode
-        setRegEx(0x35,flashCur[g_duty],0xf,0); //current
-        setRegEx(0x33,dimLevel[g_duty],0x1f,0); //dimming
-        //setRegEx(0x34,0,0xff,0); //dim freq
-        setRegEx(0x34,2,0xff,0); //dim freq
-        setRegEx(0x32,1,0x1,0); //dim en
-        setRegEx(0x32,1,0x1,6); //dim charger in en
-        setRegEx(0xe2,0x40,0xff,0); //workaround, must call
-        setRegEx(0xeb,0x40,0xff,0); //workaround, must call
-        setRegEx(0x16,0x1,0x1,0); //power source on
-    }
-	else if(torchEn[g_duty]==1)
-    {
-        setRegEx(0x32,0x1,0x1,4);  //torch mode
-        setRegEx(0x35,flashCur[g_duty],0xf,0); //current
-        setRegEx(0x32,0,0x1,0); //dim en
-        setRegEx(0xe2,0x40,0xff,0); //workaround, must call
-        setRegEx(0xeb,0x40,0xff,0); //workaround, must call
-        setRegEx(0x16,0x1,0x1,0); //power source on
-    }
-    else
-    {
-        setRegEx(0x32,0x0,0x1,4);  //torch mode=0, flash mode
-        setRegEx(0x35,flashCur[g_duty],0xf,0); //current
-        setRegEx(0x37,0x3,0x3,6); //time out, 800ms
-        setRegEx(0xe2,0x40,0xff,0); //workaround, must call
-        setRegEx(0xeb,0x40,0xff,0); //workaround, must call
-        setRegEx(0x16,0x1,0x1,0); //power source on
-    }
-	return 0;
-    }
-
-void FL_Enable_ata_test()
-{
-	setRegEx(0xF3,0x1,0x1,5); //work around for chip issue
-    setRegEx(0xF7,0x1,0x1,5); //work around for chip issue
-    setRegEx(0x32,0x1,0x1,4);  //torch mode
-    setRegEx(0x35,0,0xf,0); //current
-    setRegEx(0x32,0,0x1,0); //dim en
-    setRegEx(0xe2,0x40,0xff,0); //workaround, must call
-    setRegEx(0xeb,0x40,0xff,0); //workaround, must call
-    setRegEx(0x16,0x1,0x1,0); //power source on	
-    setRegEx(0x31,0x1,0x1,0); //flash en		
+  PK_DBG("FL_preOn");
+  return 0;
 }
+
 int FL_Enable(void)
 {
-    PK_DBG("FL_Enable+");
-    setRegEx(0x31,0x1,0x1,0); //flash en
-    PK_DBG("FL_Enable-");
-    return 0;
+  PK_DBG("FL_Enable+");
+  mt_set_gpio_mode(FLASH_GPIO_ENF, GPIO_MODE_02);
+
+  struct pwm_easy_config pwm_config;
+  pwm_config.pwm_no = 0;
+  pwm_config.duty = 48;
+  pwm_config.clk_src = 0;
+  pwm_config.clk_div = 0;
+  pwm_config.duration = 64;
+  pwm_config.pmic_pad = false;
+  pwm_set_easy_config(&pwm_config);
+
+  PK_DBG("FL_Enable-");
+  return 0;
 }
 
 int FL_Disable(void)
 {
-	PK_DBG("FL_Disable line=%d\n",__LINE__);
-    setRegEx(0x31,0x0,0x1,0);
-    setRegEx(0x16,0x0,0x1,0);
-    return 0;
+  PK_DBG("FL_Disable line=%d\n",__LINE__);
+
+  mt_set_gpio_mode(FLASH_GPIO_ENT,GPIO_MODE_00);
+  mt_set_gpio_dir(FLASH_GPIO_ENT,GPIO_DIR_OUT);
+  mt_set_gpio_out(FLASH_GPIO_ENT,GPIO_OUT_ZERO);
+
+  mt_set_gpio_mode(FLASH_GPIO_ENF,GPIO_MODE_00);
+  mt_set_gpio_dir(FLASH_GPIO_ENF,GPIO_DIR_OUT);
+  mt_set_gpio_out(FLASH_GPIO_ENF,GPIO_OUT_ZERO);
+  return 0;
 }
 
 static int FL_dim_duty(kal_uint32 duty)
@@ -178,9 +153,17 @@ static int FL_dim_duty(kal_uint32 duty)
 }
 static int FL_Init(void)
 {
-    PK_DBG(" FL_Init line=%d\n",__LINE__);
-    INIT_WORK(&workTimeOut, work_timeOutFunc);
-    return 0;
+  PK_DBG(" FL_Init line=%d\n",__LINE__);
+  if(mt_set_gpio_mode(FLASH_GPIO_ENT,GPIO_MODE_00)){PK_DBG("[constant_flashlight] set gpio mode failed!! \n");}
+  if(mt_set_gpio_dir(FLASH_GPIO_ENT,GPIO_DIR_OUT)){PK_DBG("[constant_flashlight] set gpio dir failed!! \n");}
+  if(mt_set_gpio_out(FLASH_GPIO_ENT,GPIO_OUT_ZERO)){PK_DBG("[constant_flashlight] set gpio failed!! \n");}
+
+  if(mt_set_gpio_mode(FLASH_GPIO_ENF,GPIO_MODE_00)){PK_DBG("[constant_flashlight] set gpio mode failed!! \n");}
+  if(mt_set_gpio_dir(FLASH_GPIO_ENF,GPIO_DIR_OUT)){PK_DBG("[constant_flashlight] set gpio dir failed!! \n");}
+  if(mt_set_gpio_out(FLASH_GPIO_ENF,GPIO_OUT_ZERO)){PK_DBG("[constant_flashlight] set gpio failed!! \n");}
+
+  INIT_WORK(&workTimeOut, work_timeOutFunc);
+  return 0;
 }
 static int FL_Uninit(void)
 {
@@ -429,7 +412,3 @@ ssize_t strobe_VDIrq(void)
 }
 
 EXPORT_SYMBOL(strobe_VDIrq);
-
-
-
-
