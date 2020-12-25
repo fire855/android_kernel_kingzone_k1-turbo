@@ -2156,4 +2156,3 @@ MODULE_AUTHOR("Yamaha Corporation");
 MODULE_DESCRIPTION("YAS529 Geomagnetic Sensor Driver");
 MODULE_LICENSE( "GPL" );
 MODULE_VERSION("1.2.0");
-

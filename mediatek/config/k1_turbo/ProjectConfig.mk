@@ -85,10 +85,10 @@ CUSTOM_HAL_SUB_IMGSENSOR=ov9760_mipi_raw
 CUSTOM_HAL_SUB_LENS=dummy_lens
 
 # accelerometer sensor to detect accelerometer from x y z axis.
-CUSTOM_KERNEL_ACCELEROMETER=#bma056
+CUSTOM_KERNEL_ACCELEROMETER=bma250
 
 # ALSPS sensor driverto detect ambint light and the object is close or far awary from device
-CUSTOM_KERNEL_ALSPS=#rpr410
+CUSTOM_KERNEL_ALSPS=tmg399x
 
 # Pressure sensor driver to detect pressure
 CUSTOM_KERNEL_BAROMETER=
@@ -134,7 +134,8 @@ CUSTOM_KERNEL_LEDS=mt65xx
 CUSTOM_KERNEL_LENS=#dw9718af dummy_lens
 
 # compass driver to detect compass raw data and report orientatino data
-CUSTOM_KERNEL_MAGNETOMETER=#bmm056-new
+CUSTOM_KERNEL_MAGNETOMETER=yamaha530
+
 CUSTOM_KERNEL_MAIN2_IMGSENSOR=
 
 # Kernel space image sensor  driver:Main camera (rear camera) used backup sensor driver.Value is used main backup sensor name.

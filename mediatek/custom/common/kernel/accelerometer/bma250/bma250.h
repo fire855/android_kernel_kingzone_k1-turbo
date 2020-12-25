@@ -24,11 +24,11 @@
 	 
 #include <linux/ioctl.h>
 	 
-	#define BMA250_I2C_SLAVE_WRITE_ADDR		0x30
+	#define BMA250_I2C_SLAVE_WRITE_ADDR		0x32
 	 
 	 /* BMA222 Register Map  (Please refer to BMA150 Specifications) */
 	#define BMA250_REG_DEVID				0x00
-	#define BMA250_FIXED_DEVID			0x03
+	#define BMA250_FIXED_DEVID			0xF9
 	#define BMA250_REG_OFSX				0x16
 	#define BMA250_REG_OFSX_HIGH			0x1A
 	#define BMA250_REG_BW_RATE			0x10
@@ -68,4 +68,3 @@
 #define BMA250_BUFSIZE				256
 	 
 #endif
-
