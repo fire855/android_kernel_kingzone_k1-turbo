@@ -1,0 +1,12 @@
+boot       				  /boot       mtd        defaults        defaults
+cache                     /cache      ubifs      defaults        defaults
+userdata                  /data       ubifs      defaults        defaults
+misc      				  /misc       mtd        defaults        defaults
+recovery  				  /recovery   mtd        defaults        defaults
+/dev/block/mmcblk0p1      /sdcard     vfat       defaults        defaults
+# Vanzo:songlixin on: Wed, 22 Feb 2012 18:31:03 +0800
+# To support external sdcard
+/dev/block/mmcblk0p1      /sdcard2     vfat       defaults        defaults /dev/block/mmcblk0
+# End of Vanzo:songlixin
+system                    /system     ubifs      defaults        defaults
+

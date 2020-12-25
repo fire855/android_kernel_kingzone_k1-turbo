@@ -1,0 +1,12 @@
+boot       				  /boot       emmc      defaults        defaults
+/dev/block/mmcblk0p6      /cache      ext4      defaults        defaults
+/dev/block/mmcblk0p7      /data       ext4      defaults        defaults
+misc      				  /misc       emmc      defaults        defaults
+recovery  				  /recovery   emmc      defaults        defaults
+/dev/block/mmcblk0p8      /sdcard     vfat      defaults        defaults
+# Vanzo:songlixin on: Wed, 22 Feb 2012 18:31:03 +0800
+# To support external sdcard
+/dev/block/mmcblk1p1      /sdcard2     vfat      defaults        defaults /dev/block/mmcblk1
+# End of Vanzo:songlixin
+/dev/block/mmcblk0p5      /system     ext4      defaults        defaults
+
