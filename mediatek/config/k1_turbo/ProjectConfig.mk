@@ -122,7 +122,7 @@ CUSTOM_KERNEL_GYROSCOPE=
 CUSTOM_KERNEL_HEADSET=accdet
 
 # Kernel space image sensor driver. Define  project used all image sensors .The value is combination of CUSTOM_KERNEL_MAIN_IMGSENSOR, CUSTOM_KERNEL_MAIN_BACKUP_IMGSENSOR, CUSTOM_KERNEL_SUB_IMGSENSOR, and CUSTOM_KERNEL_SUB_BACKUP_IMGSENSOR
-CUSTOM_KERNEL_IMGSENSOR=#ov8825_mipi_raw ov9760_mipi_raw
+CUSTOM_KERNEL_IMGSENSOR=imx135_mipi_raw imx219_mipi_raw imx111_mipi_raw ov5647_mipi_raw
 
 # key pad driver to report key event
 CUSTOM_KERNEL_KPD=kpd
@@ -131,7 +131,7 @@ CUSTOM_KERNEL_KPD=kpd
 CUSTOM_KERNEL_LEDS=mt65xx
 
 # same as CUSTOM_HAL_LENS
-CUSTOM_KERNEL_LENS=#dw9718af dummy_lens
+CUSTOM_KERNEL_LENS=dw9718af fm50af dummy_lens
 
 # compass driver to detect compass raw data and report orientatino data
 CUSTOM_KERNEL_MAGNETOMETER=yamaha530
@@ -142,13 +142,13 @@ CUSTOM_KERNEL_MAIN2_IMGSENSOR=
 CUSTOM_KERNEL_MAIN_BACKUP_IMGSENSOR=
 
 # lens driver config for main camera (2nd solution)
-CUSTOM_KERNEL_MAIN_BACKUP_LENS=#dummy_lens
+CUSTOM_KERNEL_MAIN_BACKUP_LENS=dummy_lens
 
 # Kernel space image sensor driver:Main camera (rear camera) used sensor driver.Value is used main sensor name.
-CUSTOM_KERNEL_MAIN_IMGSENSOR=#ov8825_mipi_raw
+CUSTOM_KERNEL_MAIN_IMGSENSOR=imx135_mipi_raw
 
 # lens driver config for main camera
-CUSTOM_KERNEL_MAIN_LENS=#dw9718af
+CUSTOM_KERNEL_MAIN_LENS=dw9718af
 
 # RTC driver customization
 CUSTOM_KERNEL_RTC=rtc
@@ -158,13 +158,13 @@ CUSTOM_KERNEL_SOUND=amp_yad
 CUSTOM_KERNEL_SSW=ssw_single
 
 # lens driver config for video telephony camera (2nd solution)
-CUSTOM_KERNEL_SUB_BACKUP_LENS=#dummy_lens
+CUSTOM_KERNEL_SUB_BACKUP_LENS=dummy_lens
 
 # Kernel space image sensor driver:Sub camera (front camera) used sensor driver.Value is used sub sensor name.
-CUSTOM_KERNEL_SUB_IMGSENSOR=#ov9760_mipi_raw
+CUSTOM_KERNEL_SUB_IMGSENSOR=imx111_mipi_raw
 
 # lens driver config for video telephony camera
-CUSTOM_KERNEL_SUB_LENS=#dummy_lens
+CUSTOM_KERNEL_SUB_LENS=fm50af
 
 # touch driver  need to report correct touch axes
 CUSTOM_KERNEL_TOUCHPANEL=GT9XX_hotknot
