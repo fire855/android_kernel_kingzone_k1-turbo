@@ -939,9 +939,9 @@ EXPORT_SYMBOL(mt_wifi_power_off);
 	    .cmd_edge       = MSDC_SMPL_FALLING,
 	    .rdata_edge     = MSDC_SMPL_FALLING,
 	    .wdata_edge     = MSDC_SMPL_FALLING,
-	    .clk_drv        = 0,
-	    .cmd_drv        = 0,
-	    .dat_drv        = 0,
+	    .clk_drv        = 2,
+	    .cmd_drv        = 2,
+	    .dat_drv        = 2,
 	    .data_pins      = 4,
 	    .data_offset    = 0,
 	    //MT6620 use External IRQ, wifi uses high speed. here wifi manage his own suspend and resume, does not support hot plug
@@ -1012,21 +1012,7 @@ struct msdc_hw msdc1_hw = {
     .dat_drv_sd_18_ddr50	= 2,
     .data_pins      = 4,
     .data_offset    = 0,
-#ifdef MTK_MSDC1_NOT_SUPPORT_SDR104
-#ifdef CUST_EINT_MSDC1_INS_NUM
-    .flags          = MSDC_SYS_SUSPEND | MSDC_WP_PIN_EN | MSDC_CD_PIN_EN | MSDC_REMOVABLE | MSDC_HIGHSPEED | MSDC_UHS1 |MSDC_DDR | MSDC_SD_NOSUPPORT_104,
-    
-#else
-    .flags          = MSDC_SYS_SUSPEND | MSDC_WP_PIN_EN | MSDC_HIGHSPEED | MSDC_UHS1 |MSDC_DDR | MSDC_SD_NOSUPPORT_104,   
-#endif
-#else
-#ifdef CUST_EINT_MSDC1_INS_NUM
-    .flags          = MSDC_SYS_SUSPEND | MSDC_WP_PIN_EN | MSDC_CD_PIN_EN | MSDC_REMOVABLE | MSDC_HIGHSPEED | MSDC_UHS1 |MSDC_DDR,
-    
-#else
-    .flags          = MSDC_SYS_SUSPEND | MSDC_WP_PIN_EN | MSDC_HIGHSPEED | MSDC_UHS1 |MSDC_DDR,   
-#endif
-#endif
+    .flags          = MSDC_SYS_SUSPEND | MSDC_HIGHSPEED,
   	  .dat0rddly		= 0,
 			.dat1rddly		= 0,
 			.dat2rddly		= 0,
@@ -1052,9 +1038,9 @@ struct msdc_hw msdc1_hw = {
 	    .cmd_edge       = MSDC_SMPL_FALLING,
 	    .rdata_edge     = MSDC_SMPL_FALLING,
     	.wdata_edge     = MSDC_SMPL_FALLING,
-	    .clk_drv        = 0,
-    	.cmd_drv        = 0,
-    	.dat_drv        = 0,
+	    .clk_drv        = 1,
+    	.cmd_drv        = 1,
+    	.dat_drv        = 1,
 	    .data_pins      = 4,
 	    .data_offset    = 0,
 	    //MT6620 use External IRQ, wifi uses high speed. here wifi manage his own suspend and resume, does not support hot plug
