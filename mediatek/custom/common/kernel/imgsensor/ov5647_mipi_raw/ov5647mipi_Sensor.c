@@ -1061,9 +1061,9 @@ void OV5647MIPI_set_mirror(UINT32 image_mirror)
     UINT32 curr_mirror = 0, curr_flip = 0;
 
     // TODO: For debug the V project only.
-    if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
+    /*if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
         image_mirror = IMAGE_V_MIRROR;
-    else
+    else*/
         image_mirror = IMAGE_H_MIRROR;
     OV5647_sensor_mirror_flip = image_mirror;
 
@@ -1715,7 +1715,7 @@ UINT32 OV5647MIPIGetInfo(MSDK_SCENARIO_ID_ENUM ScenarioId,
 					  MSDK_SENSOR_CONFIG_STRUCT *pSensorConfigData)
 {
 #ifdef OV5647MIPI_DRIVER_TRACE
-	//SENSORDB("OV5647MIPIGetInfo£¬FeatureId:%d\n",ScenarioId);
+	//SENSORDB("OV5647MIPIGetInfoï¿½ï¿½FeatureId:%d\n",ScenarioId);
 #endif
 
 

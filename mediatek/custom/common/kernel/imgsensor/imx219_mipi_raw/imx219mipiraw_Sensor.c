@@ -800,10 +800,10 @@ UINT32 IMX219MIPIOpen(void)
     if (IMX219MIPI_sensor_id != IMX219MIPI_SENSOR_ID)
         return ERROR_SENSOR_CONNECT_FAIL;
     IMX219MIPI_Sensor_Init();
-    if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
+    /*if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
     {
       IMX219MIPISetFlipMirror(IMAGE_NORMAL);
-    }
+    }*/
     iPreGain = 0;
 	sensorid=read_IMX219MIPI_gain();
 	spin_lock(&IMX219_drv_lock);	
@@ -1284,10 +1284,10 @@ UINT32 IMX219MIPIGetInfo(MSDK_SCENARIO_ID_ENUM ScenarioId,
     pSensorInfo->SensorResetActiveHigh=FALSE;
     pSensorInfo->SensorResetDelayCount=5;
     pSensorInfo->SensorOutputDataFormat=SENSOR_OUTPUT_FORMAT_RAW_R;
-    if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
+    /*if(0 == strncmp(VANZO_MAIN_CAM_ROTATION, "180", 3))
     {
         pSensorInfo->SensorOutputDataFormat=SENSOR_OUTPUT_FORMAT_RAW_B;
-    }
+    }*/
     pSensorInfo->SensorClockPolarity=SENSOR_CLOCK_POLARITY_LOW; /*??? */
     pSensorInfo->SensorClockFallingPolarity=SENSOR_CLOCK_POLARITY_LOW;
     pSensorInfo->SensorHsyncPolarity = SENSOR_CLOCK_POLARITY_LOW;
@@ -1776,4 +1776,3 @@ UINT32 IMX219_MIPI_RAW_SensorInit(PSENSOR_FUNCTION_STRUCT *pfFunc)
         *pfFunc=&SensorFuncIMX219MIPI;
     return ERROR_NONE;
 }   /* SensorInit() */
-
