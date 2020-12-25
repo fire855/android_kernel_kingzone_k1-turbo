@@ -39,7 +39,7 @@
 #pragma pack(1)
 typedef struct 
 {
-    u8  wr;         //write read flag£¬0:R  1:W  2:PID 3:
+    u8  wr;         //write read flagï¿½ï¿½0:R  1:W  2:PID 3:
     u8  flag;       //0:no need flag/int 1: need flag  2:need int
     u8 flag_addr[2];  //flag address 
     u8  flag_val;   //flag val
@@ -69,10 +69,10 @@ extern s32 gup_enter_update_mode(struct i2c_client *client);
 extern void gup_leave_update_mode(void);
 extern s32 gup_update_proc(void *dir);
 #endif 
-extern s32 gup_load_hotknot_system(void);
-extern s32 gup_load_fx_system(void);
-extern s32 gup_recovery_main_system(void);
-extern s32 gup_load_main_system(char *filepath);
+//extern s32 gup_load_hotknot_system(void);
+//extern s32 gup_load_fx_system(void);
+//extern s32 gup_recovery_main_system(void);
+//extern s32 gup_load_main_system(char *filepath);
 
 static struct proc_dir_entry *goodix_proc_entry;
 
@@ -424,11 +424,11 @@ static s32 goodix_tool_write(struct file *filp, const char __user *buff, unsigne
     GTP_DEBUG_FUNC();
     GTP_DEBUG_ARRAY((u8 *)buff, len);
 
-    if(tpd_halt == 1||is_reseting == 1)
+    /*if(tpd_halt == 1||is_reseting == 1)
     {
         //GTP_ERROR("[Write]tpd_halt =1 fail!");
 	return FAIL;
-    }
+}*/
 
 	ret = copy_from_user(&cmd_head, buff, CMD_HEAD_LENGTH);
 
@@ -581,31 +581,31 @@ static s32 goodix_tool_write(struct file *filp, const char __user *buff, unsigne
 	    ret = copy_from_user(&cmd_head.data[0], &buff[CMD_HEAD_LENGTH], cmd_head.data_len);
 		if(0 == cmd_head.data[0])
 		{
-			if (FAIL == gup_load_hotknot_system())
+			/*if (FAIL == gup_load_hotknot_system())
 			{
 				return FAIL;
-			}
+			}*/
 		}
 		else if(1 == cmd_head.data[0])
 		{
-			if (FAIL == gup_load_fx_system())
+			/*if (FAIL == gup_load_fx_system())
 			{
 				return FAIL;
-			}		
+			}	*/	
 		}
         else if(2 == cmd_head.data[0])
         {
-			if (FAIL == gup_recovery_main_system())
+			/*if (FAIL == gup_recovery_main_system())
 			{
 				return FAIL;
-			}
+			}*/
         }
 		else if(3 == cmd_head.data[0])
 		{
-			if (FAIL == gup_load_main_system(NULL))
+			/*if (FAIL == gup_load_main_system(NULL))
 			{
 				return FAIL;
-			}
+			}*/
 		}
 	}	
 #if HOTKNOT_BLOCK_RW
@@ -706,11 +706,11 @@ static s32 goodix_tool_read(char *page, char **start, off_t off, int count, int 
 {
     GTP_DEBUG_FUNC();
 
-    if(tpd_halt == 1||is_reseting == 1)
+    /*if(tpd_halt == 1||is_reseting == 1)
     {
         //GTP_ERROR("[READ]tpd_halt =1 fail!");
 	return FAIL;
-    }
+}*/
     if (cmd_head.wr % 2)
     {
         GTP_ERROR("[READ] invaild operator fail!");
@@ -807,5 +807,3 @@ static s32 goodix_tool_read(char *page, char **start, off_t off, int count, int 
 
     return cmd_head.data_len;
 }
-
-

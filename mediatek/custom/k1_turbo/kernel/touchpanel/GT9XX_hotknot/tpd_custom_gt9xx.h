@@ -39,14 +39,14 @@
 
 /* Pre-defined definition */
 
-#define TPD_KEY_COUNT   4
-#define key_1           60,850              //auto define  
-#define key_2           180,850
-#define key_3           300,850
-#define key_4           420,850
+#define TPD_KEY_COUNT   3
+#define key_1           270,2000              //auto define  
+#define key_2           540,2000
+#define key_3           810,2000
 
-#define TPD_KEYS        {KEY_BACK, KEY_HOME, KEY_MENU, KEY_SEARCH}
-#define TPD_KEYS_DIM    {{key_1,50,30},{key_2,50,30},{key_3,50,30},{key_4,50,30}}
+#define TPD_KEYS        {KEY_MENU, KEY_HOME, KEY_BACK}
+#define TPD_KEYS_DIM    {{key_1,50,30},{key_2,50,30},{key_3,50,30}}
+#define GTP_KEY_MAP_ARRAY {{key_1},{key_2},{key_3}}
 
 struct goodix_ts_data
 {
@@ -75,35 +75,42 @@ extern u8 gtp_rawdiff_mode;
 
 extern s32 gtp_send_cfg(struct i2c_client *client);
 extern void gtp_reset_guitar(struct i2c_client *client, s32 ms);
-extern void gtp_int_sync(void);
+extern void gtp_int_sync(s32 ms);
 extern u8 gup_init_update_proc(struct i2c_client *client);
 extern u8 gup_init_fw_proc(struct i2c_client *client);
 extern s32 gtp_i2c_read(struct i2c_client *client, u8 *buf, s32 len);
 extern s32 gtp_i2c_write(struct i2c_client *client, u8 *buf, s32 len);
 extern int i2c_write_bytes(struct i2c_client *client, u16 addr, u8 *txbuf, int len);
 extern int i2c_read_bytes(struct i2c_client *client, u16 addr, u8 *rxbuf, int len);
+extern s32 gtp_i2c_read_dbl_check(struct i2c_client *client, u16 addr, u8 *rxbuf, int len);
 
 //***************************PART1:ON/OFF define*******************************
 #define GTP_CUSTOM_CFG        0
-#define GTP_DRIVER_SEND_CFG   1       //driver send config to TP on intilization (for no config built in TP flash)
-#define GTP_HAVE_TOUCH_KEY    0
+#define GTP_DRIVER_SEND_CFG   0       //driver send config to TP on intilization (for no config built in TP flash)
+#define GTP_HAVE_TOUCH_KEY    1
 #define GTP_POWER_CTRL_SLEEP  1       //turn off power on suspend
-#define GTP_AUTO_UPDATE       1       //update FW to TP FLASH
+#define GTP_AUTO_UPDATE       0       //update FW to TP FLASH
 #define GTP_CHANGE_X2Y        0				//set for se1
 #define GTP_ESD_PROTECT       0
-#define GTP_CREATE_WR_NODE    0
+#define GTP_CREATE_WR_NODE    1
 #define GUP_USE_HEADER_FILE   0
 #define GTP_FW_DOWNLOAD       0       //update FW to TP SRAM
+#define GTP_COMPATIBLE_MODE   0
 //#define GTP_CHARGER_DETECT
 
 //#define TPD_PROXIMITY
-//#define TPD_HAVE_BUTTON               //report key as coordinate,Vibration feedback
+#define TPD_HAVE_BUTTON               //report key as coordinate,Vibration feedback
 //#define TPD_WARP_X
 //#define TPD_WARP_Y
 
 #define GTP_DEBUG_ON          0
 #define GTP_DEBUG_ARRAY_ON    0
 #define GTP_DEBUG_FUNC_ON     0
+
+#define CFG_GROUP_LEN(p_cfg_grp)  (sizeof(p_cfg_grp) / sizeof(p_cfg_grp[0]))
+
+#define GTP_CONFIG_MIN_LENGTH       186
+#define GTP_CONFIG_MAX_LENGTH       240
 
 //***************************PART2:TODO define**********************************
 //STEP_1(REQUIRED):Change config table.
@@ -155,6 +162,30 @@ a sample config, send this config should cause the chip cannot work normally*/
 #define CTP_CFG_GROUP3_CHARGER {\
     }
 
+// TODO: define your config for Sensor_ID == 4 here, if needed
+#define CTP_CFG_GROUP4 {\
+    }
+    
+//TODO puts your group4 config info here,if need.
+#define GTP_CFG_GROUP4_CHARGER {\
+    }
+    
+// TODO: define your config for Sensor_ID == 5 here, if needed
+#define CTP_CFG_GROUP5 {\
+    }
+    
+//TODO puts your group5 config info here,if need.
+#define GTP_CFG_GROUP5_CHARGER {\
+    }
+
+// TODO: define your config for Sensor_ID == 5 here, if needed
+#define CTP_CFG_GROUP6 {\
+    }
+    
+//TODO puts your group5 config info here,if need.
+#define GTP_CFG_GROUP6_CHARGER {\
+    }
+
 //STEP_2(REQUIRED):Change I/O define & I/O operation mode.
 #define GTP_RST_PORT    GPIO_CTP_RST_PIN
 #define GTP_INT_PORT    GPIO_CTP_EINT_PIN
@@ -186,25 +217,25 @@ a sample config, send this config should cause the chip cannot work normally*/
 #define GTP_IRQ_TAB                     {IRQ_TYPE_EDGE_RISING, IRQ_TYPE_EDGE_FALLING, IRQ_TYPE_LEVEL_LOW, IRQ_TYPE_LEVEL_HIGH}
 
 //STEP_3(optional):Custom set some config by themself,if need.
-#if GTP_CUSTOM_CFG
+/*#if GTP_CUSTOM_CFG
 #define GTP_MAX_HEIGHT   800
 #define GTP_MAX_WIDTH    480
 #define GTP_INT_TRIGGER  0    //0:Rising 1:Falling
-#else
-#define GTP_MAX_HEIGHT   1280
-#define GTP_MAX_WIDTH    720
+#else*/
+#define GTP_MAX_HEIGHT   1920
+#define GTP_MAX_WIDTH    1080
 #define GTP_INT_TRIGGER  1
-#endif
+//#endif
 #define GTP_MAX_TOUCH      5
 #define GTP_ESD_CHECK_CIRCLE  2000
-#define TPD_POWER_SOURCE_CUSTOM	MT6323_POWER_LDO_VGP1
-#define VELOCITY_CUSTOM
-#define TPD_VELOCITY_CUSTOM_X 15
-#define TPD_VELOCITY_CUSTOM_Y 15
+#define TPD_POWER_SOURCE_CUSTOM	5
+//#define VELOCITY_CUSTOM
+//#define TPD_VELOCITY_CUSTOM_X 15
+//#define TPD_VELOCITY_CUSTOM_Y 15
 
 //STEP_4(optional):If this project have touch key,Set touch key config.
 #if GTP_HAVE_TOUCH_KEY
-#define GTP_KEY_TAB	 {KEY_MENU, KEY_HOME, KEY_BACK, KEY_SEND}
+#define GTP_KEY_TAB	 {KEY_MENU, KEY_HOME, KEY_BACK}
 #endif
 
 //***************************PART3:OTHER define*********************************

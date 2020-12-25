@@ -1391,7 +1391,7 @@ void gtp_reset_guitar(struct i2c_client *client, s32 ms)
     }
 #endif
 
-    gtp_int_sync(100);  // for dbl-system
+    gtp_int_sync(50);  // for dbl-system
 #if GTP_ESD_PROTECT
     gtp_init_ext_watchdog(i2c_client_point);
 #endif
@@ -1463,6 +1463,8 @@ reset_proc:
             }
         }
     }
+
+    tpd_load_status = 1;
     
     return ret;
 }
@@ -2484,7 +2486,7 @@ static int touch_event_handler(void *unused)
             continue;
         }
     #endif
-        if(tpd_halt||(is_reseting == 1) || (load_fw_process == 1))
+        if(tpd_halt/*||(is_reseting == 1)*/ || (load_fw_process == 1))
         {
             mutex_unlock(&i2c_access);
             GTP_DEBUG("return for interrupt after suspend...  ");
@@ -3380,4 +3382,3 @@ static void __exit tpd_driver_exit(void)
 
 module_init(tpd_driver_init);
 module_exit(tpd_driver_exit);
-
