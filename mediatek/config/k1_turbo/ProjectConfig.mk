@@ -1034,7 +1034,7 @@ MTK_NFC_OMAAC_SUPPORT=no
 MTK_NFC_SE_NUM=7
 
 # NFC stands for near field communication. It is a short-range wireless communication technology, which can be used in data exchange, information download, payment application, etc
-MTK_NFC_SUPPORT=no
+MTK_NFC_SUPPORT=yes
 
 # Support Notpad feature
 MTK_NOTEBOOK_SUPPORT=no
