@@ -166,7 +166,7 @@ CUSTOM_KERNEL_SUB_IMGSENSOR=#ov9760_mipi_raw
 CUSTOM_KERNEL_SUB_LENS=#dummy_lens
 
 # touch driver  need to report correct touch axes
-CUSTOM_KERNEL_TOUCHPANEL=#S7020 #GT9XX
+CUSTOM_KERNEL_TOUCHPANEL=GT9XX_hotknot
 
 # Configuration for USB PHY
 CUSTOM_KERNEL_USB=mt6577
