@@ -553,7 +553,7 @@ do_DataAbort(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 		thread->cpu_excp++;
 		if (thread->cpu_excp == 1) {
 			thread->regs_on_excp = (void *)regs;
-			aee_excp_regs = (void*)regs;
+			//aee_excp_regs = (void*)regs;
 		}
 		/*
 		 * NoteXXX: The data abort exception may happen twice
@@ -563,9 +563,9 @@ do_DataAbort(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 		 *          Check if the nested panic happens via 
 		 *          (cpu_excp >= 3).
 		 */
-		if (thread->cpu_excp >= 3) {
+		/*if (thread->cpu_excp >= 3) {
 			aee_stop_nested_panic(regs);
-		}
+		}*/
 	}
 
 	ret = inf->fn(addr, fsr & ~FSR_LNX_PF, regs);
@@ -611,7 +611,7 @@ do_PrefetchAbort(unsigned long addr, unsigned int ifsr, struct pt_regs *regs)
 		thread->cpu_excp++;
 		if (thread->cpu_excp == 1) {
 			thread->regs_on_excp = (void *)regs;
-			aee_excp_regs = (void*)regs;
+			//aee_excp_regs = (void*)regs;
 		}
 		/*
 		 * NoteXXX: The data abort exception may happen twice
@@ -621,9 +621,9 @@ do_PrefetchAbort(unsigned long addr, unsigned int ifsr, struct pt_regs *regs)
 		 *          Check if the nested panic happens via 
 		 *          (cpu_excp >= 3).
 		 */
-		if (thread->cpu_excp >= 3) {
+		/*if (thread->cpu_excp >= 3) {
 			aee_stop_nested_panic(regs);
-		}
+		}*/
 	}
 
 	ret = inf->fn(addr, ifsr | FSR_LNX_PF, regs);
