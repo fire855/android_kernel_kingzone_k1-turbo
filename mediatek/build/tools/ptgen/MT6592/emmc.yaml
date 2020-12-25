@@ -252,8 +252,8 @@
   Region: EMMC_USER
   Reserved: N
   Size_KB:
-    eng: 921600
-    user: 921600
+    eng: 1429504
+    user: 1429504
   Type: EXT4
 - Download: Y
   Download_File: cache.img
@@ -284,8 +284,8 @@
   Region: EMMC_USER
   Reserved: N
   Size_KB:
-    eng: 1208320
-    user: 1208320
+    eng: 5320704
+    user: 5320704
   Type: EXT4
 - Download: N
   Download_File: NONE
