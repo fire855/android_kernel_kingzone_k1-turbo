@@ -18,8 +18,13 @@
 #define LCD_DEBUG(fmt)  printk(fmt)
 #endif
 
+extern LCM_DRIVER e19_k168a_yikuailai_nt35596_lcm_drv;
+
 LCM_DRIVER* lcm_driver_list[] =
 {
+#if defined(E19_K168A_YIKUAILAI_NT35596)
+  &e19_k168a_yikuailai_nt35596_lcm_drv,
+#endif
 };
 
 #define LCM_COMPILE_ASSERT(condition) LCM_COMPILE_ASSERT_X(condition, __LINE__)
