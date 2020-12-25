@@ -137,12 +137,12 @@ int mt_usb_get_vbus_status(struct musb *musb)
 
 void mt_usb_init_drvvbus(void)
 {
-#if !(defined(SWITCH_CHARGER) || defined(FPGA_PLATFORM))
+//#if !(defined(SWITCH_CHARGER) || defined(FPGA_PLATFORM))
 	mt_set_gpio_mode(GPIO_OTG_DRVVBUS_PIN,GPIO_OTG_DRVVBUS_PIN_M_GPIO);//should set GPIO2 as gpio mode.
 	mt_set_gpio_dir(GPIO_OTG_DRVVBUS_PIN,GPIO_DIR_OUT);
 	mt_get_gpio_pull_enable(GPIO_OTG_DRVVBUS_PIN);
 	mt_set_gpio_pull_select(GPIO_OTG_DRVVBUS_PIN,GPIO_PULL_UP);
-#endif
+//#endif
 }
 
 u32 sw_deboun_time = 400;
