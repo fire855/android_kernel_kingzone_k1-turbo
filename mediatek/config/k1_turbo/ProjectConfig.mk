@@ -85,10 +85,10 @@ CUSTOM_HAL_SUB_IMGSENSOR=ov9760_mipi_raw
 CUSTOM_HAL_SUB_LENS=dummy_lens
 
 # accelerometer sensor to detect accelerometer from x y z axis.
-CUSTOM_KERNEL_ACCELEROMETER=bma056
+CUSTOM_KERNEL_ACCELEROMETER=#bma056
 
 # ALSPS sensor driverto detect ambint light and the object is close or far awary from device
-CUSTOM_KERNEL_ALSPS=rpr410
+CUSTOM_KERNEL_ALSPS=#rpr410
 
 # Pressure sensor driver to detect pressure
 CUSTOM_KERNEL_BAROMETER=
@@ -113,7 +113,7 @@ CUSTOM_KERNEL_DCT=dct
 CUSTOM_KERNEL_EEPROM=dummy_eeprom
 
 # Kernel space cameara flashlight driver. You can use this driver to choose cameara flashlight type.
-CUSTOM_KERNEL_FLASHLIGHT=constant_flashlight
+CUSTOM_KERNEL_FLASHLIGHT=#constant_flashlight
 
 # gyro driver
 CUSTOM_KERNEL_GYROSCOPE=
@@ -122,7 +122,7 @@ CUSTOM_KERNEL_GYROSCOPE=
 CUSTOM_KERNEL_HEADSET=accdet
 
 # Kernel space image sensor driver. Define  project used all image sensors .The value is combination of CUSTOM_KERNEL_MAIN_IMGSENSOR, CUSTOM_KERNEL_MAIN_BACKUP_IMGSENSOR, CUSTOM_KERNEL_SUB_IMGSENSOR, and CUSTOM_KERNEL_SUB_BACKUP_IMGSENSOR
-CUSTOM_KERNEL_IMGSENSOR=ov8825_mipi_raw ov9760_mipi_raw
+CUSTOM_KERNEL_IMGSENSOR=#ov8825_mipi_raw ov9760_mipi_raw
 
 # key pad driver to report key event
 CUSTOM_KERNEL_KPD=kpd
@@ -131,23 +131,23 @@ CUSTOM_KERNEL_KPD=kpd
 CUSTOM_KERNEL_LEDS=mt65xx
 
 # same as CUSTOM_HAL_LENS
-CUSTOM_KERNEL_LENS=dw9718af dummy_lens
+CUSTOM_KERNEL_LENS=#dw9718af dummy_lens
 
 # compass driver to detect compass raw data and report orientatino data
-CUSTOM_KERNEL_MAGNETOMETER=bmm056-new
+CUSTOM_KERNEL_MAGNETOMETER=#bmm056-new
 CUSTOM_KERNEL_MAIN2_IMGSENSOR=
 
 # Kernel space image sensor  driver:Main camera (rear camera) used backup sensor driver.Value is used main backup sensor name.
 CUSTOM_KERNEL_MAIN_BACKUP_IMGSENSOR=
 
 # lens driver config for main camera (2nd solution)
-CUSTOM_KERNEL_MAIN_BACKUP_LENS=dummy_lens
+CUSTOM_KERNEL_MAIN_BACKUP_LENS=#dummy_lens
 
 # Kernel space image sensor driver:Main camera (rear camera) used sensor driver.Value is used main sensor name.
-CUSTOM_KERNEL_MAIN_IMGSENSOR=ov8825_mipi_raw
+CUSTOM_KERNEL_MAIN_IMGSENSOR=#ov8825_mipi_raw
 
 # lens driver config for main camera
-CUSTOM_KERNEL_MAIN_LENS=dw9718af
+CUSTOM_KERNEL_MAIN_LENS=#dw9718af
 
 # RTC driver customization
 CUSTOM_KERNEL_RTC=rtc
@@ -157,16 +157,16 @@ CUSTOM_KERNEL_SOUND=amp_yad_spk_amp_tpa6136_hp
 CUSTOM_KERNEL_SSW=ssw_single
 
 # lens driver config for video telephony camera (2nd solution)
-CUSTOM_KERNEL_SUB_BACKUP_LENS=dummy_lens
+CUSTOM_KERNEL_SUB_BACKUP_LENS=#dummy_lens
 
 # Kernel space image sensor driver:Sub camera (front camera) used sensor driver.Value is used sub sensor name.
-CUSTOM_KERNEL_SUB_IMGSENSOR=ov9760_mipi_raw
+CUSTOM_KERNEL_SUB_IMGSENSOR=#ov9760_mipi_raw
 
 # lens driver config for video telephony camera
-CUSTOM_KERNEL_SUB_LENS=dummy_lens
+CUSTOM_KERNEL_SUB_LENS=#dummy_lens
 
 # touch driver  need to report correct touch axes
-CUSTOM_KERNEL_TOUCHPANEL=S7020 #GT9XX
+CUSTOM_KERNEL_TOUCHPANEL=#S7020 #GT9XX
 
 # Configuration for USB PHY
 CUSTOM_KERNEL_USB=mt6577
