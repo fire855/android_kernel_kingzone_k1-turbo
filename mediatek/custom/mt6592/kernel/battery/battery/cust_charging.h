@@ -105,11 +105,7 @@
 
 
 /* High battery support */
-/* Vanzo:songlixin on: Wed, 23 Apr 2014 18:11:30 +0800
- * move to project config
- * #define HIGH_BATTERY_VOLTAGE_SUPPORT
- */
-// End of Vanzo: songlixin
+#define HIGH_BATTERY_VOLTAGE_SUPPORT 1
 
 /* Disable Battery check for HQA */
 #ifdef MTK_DISABLE_POWER_ON_OFF_VOLTAGE_LIMITATION
